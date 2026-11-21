@@ -39,7 +39,7 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- ============================ NAV ============================ -->
-  <nav class="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-sand">
+  <nav id="site-nav" class="site-nav sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-sand">
     <div class="max-w-6xl mx-auto px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
       <button type="button" onclick="showPage('home')" class="flex items-center gap-3 bg-transparent border-0 cursor-pointer p-0 text-left shrink-0">
         <span class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-sand shadow-sm p-1 flex items-center justify-center overflow-hidden shrink-0">
@@ -74,8 +74,8 @@
                 Design of a Motorized Slider-Crank Enset Scraping Machine with Controlled Fermentation
               </p>
               <div class="mt-7 sm:mt-8 flex flex-wrap gap-3">
-                <button type="button" onclick="showPage('project')" class="px-5 py-3 rounded-full bg-clay-600 hover:bg-clay-700 text-white text-sm font-semibold transition cursor-pointer border-0">Explore the project</button>
-                <button type="button" onclick="showPage('team')" class="px-5 py-3 rounded-full border border-cream/30 hover:bg-white/10 text-cream text-sm font-semibold transition cursor-pointer bg-transparent">Meet the team</button>
+                <button type="button" onclick="showPage('project')" class="btn-tactile px-5 py-3 rounded-full bg-clay-600 hover:bg-clay-700 text-white text-sm font-semibold cursor-pointer border-0 shadow-sm hover:shadow">Explore the project</button>
+                <button type="button" onclick="showPage('team')" class="btn-tactile px-5 py-3 rounded-full border border-cream/30 hover:bg-white/10 text-cream text-sm font-semibold cursor-pointer bg-transparent">Meet the team</button>
               </div>
             </div>
 
@@ -104,7 +104,7 @@
       </div>
 
       <!-- Interactive How it works -->
-      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20 reveal">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
           <div>
             <p class="eyebrow text-clay-600 mb-2">Interactive Process</p>
@@ -120,7 +120,7 @@
       </div>
 
       <!-- SDGs -->
-      <div class="bg-enset-50 border-y border-sand">
+      <div class="bg-enset-50 border-y border-sand reveal">
         <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14">
           <p class="eyebrow text-clay-600 mb-2">Impact</p>
           <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-enset-900 mb-8">Aligned with the UN Sustainable Development Goals</h2>
@@ -249,16 +249,17 @@
 
   <!-- ============================ LIGHTBOX ============================ -->
   <div id="lightbox" class="fixed inset-0 z-50 hidden bg-enset-950/90 backdrop-blur-sm items-center justify-center p-4" onclick="if(event.target===this)closeLightbox()">
-    <div class="max-w-3xl w-full bg-cream rounded-2xl overflow-hidden shadow-2xl border border-sand">
+    <div class="lb-panel max-w-3xl w-full bg-cream rounded-2xl overflow-hidden shadow-2xl border border-sand">
       <div class="relative bg-enset-950 flex items-center justify-center">
         <img id="lb-img" src="" alt="" class="max-h-[72vh] max-w-full w-auto object-contain" />
-        <button type="button" onclick="closeLightbox()" aria-label="Close lightbox" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-enset-950/75 text-white hover:bg-clay-600 transition text-lg leading-none cursor-pointer border-0">&times;</button>
+        <span id="lb-counter" class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-enset-950/75 text-cream text-[11px] font-semibold"></span>
+        <button type="button" onclick="closeLightbox()" aria-label="Close lightbox" class="btn-tactile absolute top-3 right-3 w-9 h-9 rounded-full bg-enset-950/75 text-white hover:bg-clay-600 text-lg leading-none cursor-pointer border-0">&times;</button>
       </div>
       <div class="px-5 py-3 flex flex-wrap items-center justify-between gap-3">
         <span id="lb-cap" class="text-sm font-medium text-enset-900"></span>
         <div class="flex gap-2">
-          <button type="button" onclick="stepLightbox(-1)" class="px-3 py-1 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">&larr; Prev</button>
-          <button type="button" onclick="stepLightbox(1)" class="px-3 py-1 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">Next &rarr;</button>
+          <button type="button" onclick="stepLightbox(-1)" class="btn-tactile px-3 py-1 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">&larr; Prev</button>
+          <button type="button" onclick="stepLightbox(1)" class="btn-tactile px-3 py-1 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">Next &rarr;</button>
         </div>
       </div>
     </div>

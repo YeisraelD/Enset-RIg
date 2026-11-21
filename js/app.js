@@ -4,6 +4,94 @@
 // =====================================================================
 const $ = (id) => document.getElementById(id);
 const imgSrc = (s) => (!s ? "" : s);
+const prefersReducedMotion = () =>
+  window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function animatePanel(el) {
+  if (!el || prefersReducedMotion()) return;
+  el.classList.remove("panel-swap");
+  void el.offsetWidth;
+  el.classList.add("panel-swap");
+}
+
+let revealObserver = null;
+function initScrollReveal() {
+  const targets = document.querySelectorAll(".reveal");
+  if (!targets.length) return;
+  if (prefersReducedMotion() || typeof IntersectionObserver === "undefined") {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -24px 0px" }
+    );
+  }
+  targets.forEach((el) => {
+    if (!el.classList.contains("is-visible")) {
+      revealObserver.observe(el);
+    }
+  });
+}
+
+let statsAnimated = false;
+function initStatCounters() {
+  const container = $("stats");
+  if (!container || statsAnimated) return;
+
+  const runCount = () => {
+    if (statsAnimated) return;
+    statsAnimated = true;
+    const nums = container.querySelectorAll("[data-stat-idx]");
+    if (prefersReducedMotion()) return;
+
+    const duration = 850;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      nums.forEach((el) => {
+        const s = SITE.stats[Number(el.dataset.statIdx)];
+        if (!s || !s.anim) return;
+        const { from, to, prefix, suffix, comma } = s.anim;
+        const val = Math.round(from + (to - from) * eased);
+        el.textContent = prefix + (comma ? val.toLocaleString() : val) + suffix;
+      });
+      if (t < 1) requestAnimationFrame(step);
+      else {
+        nums.forEach((el) => {
+          const s = SITE.stats[Number(el.dataset.statIdx)];
+          if (s) el.textContent = s.value;
+        });
+      }
+    };
+    requestAnimationFrame(step);
+  };
+
+  if (prefersReducedMotion() || typeof IntersectionObserver === "undefined") {
+    statsAnimated = true;
+    return;
+  }
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        runCount();
+        obs.disconnect();
+      }
+    },
+    { threshold: 0.25 }
+  );
+  obs.observe(container);
+}
 
 let activeStep = 0;
 function selectStep(i) {
@@ -12,10 +100,10 @@ function selectStep(i) {
     .map((s, idx) => {
       const on = idx === activeStep;
       return `
-        <button type="button" onclick="selectStep(${idx})" class="text-left p-5 rounded-2xl border transition cursor-pointer ${
+        <button type="button" onclick="selectStep(${idx})" class="btn-tactile text-left p-5 rounded-2xl border cursor-pointer ${
           on
             ? "bg-enset-800 text-cream border-enset-800 shadow-lg"
-            : "bg-white text-ink border-[#E7E1D2] hover:border-clay-600/60"
+            : "bg-white text-ink border-[#E7E1D2] hover:border-clay-600/60 hover:shadow-sm"
         }">
           <div class="flex items-center justify-between gap-2">
             <span class="font-serif text-sm font-semibold ${on ? "text-clay-100" : "text-clay-600"}">${s.n} · ${s.tag}</span>
@@ -27,7 +115,8 @@ function selectStep(i) {
     .join("");
 
   const cur = SITE.steps[activeStep];
-  $("step-preview").innerHTML = `
+  const preview = $("step-preview");
+  preview.innerHTML = `
     <div class="relative h-56 sm:h-64 bg-enset-900 overflow-hidden">
       <img src="${imgSrc(cur.img)}" alt="${cur.title}" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-gradient-to-t from-enset-950/80 via-transparent to-transparent"></div>
@@ -48,20 +137,22 @@ function selectStep(i) {
       <div class="mt-5 pt-4 border-t border-sand flex items-center justify-between gap-2">
         <span class="text-xs text-stone-400">Step ${activeStep + 1} of ${SITE.steps.length}</span>
         <div class="flex gap-2">
-          <button type="button" onclick="selectStep(${activeStep - 1})" class="px-3 py-1.5 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">&larr; Prev</button>
-          <button type="button" onclick="selectStep(${activeStep + 1})" class="px-3 py-1.5 rounded-full bg-clay-600 text-white text-xs font-semibold hover:bg-clay-700 cursor-pointer border-0">Next step &rarr;</button>
+          <button type="button" onclick="selectStep(${activeStep - 1})" class="btn-tactile px-3 py-1.5 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">&larr; Prev</button>
+          <button type="button" onclick="selectStep(${activeStep + 1})" class="btn-tactile px-3 py-1.5 rounded-full bg-clay-600 text-white text-xs font-semibold hover:bg-clay-700 cursor-pointer border-0">Next step &rarr;</button>
         </div>
       </div>
     </div>`;
+  animatePanel(preview);
 }
 
 function setCompare(mode) {
   const data = SITE.compare[mode];
-  const onCls = "px-4 py-1.5 rounded-full text-xs font-semibold transition bg-enset-800 text-cream cursor-pointer border-0";
-  const offCls = "px-4 py-1.5 rounded-full text-xs font-semibold transition text-stone-600 hover:text-enset-900 cursor-pointer bg-transparent border-0";
+  const onCls = "btn-tactile px-4 py-1.5 rounded-full text-xs font-semibold bg-enset-800 text-cream cursor-pointer border-0";
+  const offCls = "btn-tactile px-4 py-1.5 rounded-full text-xs font-semibold text-stone-600 hover:text-enset-900 cursor-pointer bg-transparent border-0";
   $("cmp-btn-trad").className = mode === "trad" ? onCls : offCls;
   $("cmp-btn-rig").className = mode === "rig" ? onCls : offCls;
-  $("compare-panel").innerHTML = `
+  const panel = $("compare-panel");
+  panel.innerHTML = `
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
       <div class="md:col-span-5">
         <img src="${imgSrc(data.img)}" alt="${data.title}" class="w-full aspect-[4/3] object-cover rounded-xl border border-sand" />
@@ -73,7 +164,7 @@ function setCompare(mode) {
           ${data.points
             .map(
               ([k, v]) => `
-            <div class="bg-white rounded-xl p-3 border border-sand">
+            <div class="bg-white rounded-xl p-3 border border-sand card-interactive">
               <div class="text-[11px] uppercase tracking-wider text-stone-400 font-semibold">${k}</div>
               <div class="text-sm font-semibold text-enset-900 mt-0.5">${v}</div>
             </div>`
@@ -82,9 +173,11 @@ function setCompare(mode) {
         </div>
       </div>
     </div>`;
+  animatePanel(panel);
 }
 
 let lbIndex = 0;
+let lbTouchStartX = 0;
 const lbItems = () => SITE.gallery.filter((g) => g.src);
 function openLightbox(idx) {
   const items = lbItems();
@@ -93,6 +186,9 @@ function openLightbox(idx) {
   $("lb-img").src = imgSrc(items[lbIndex].src);
   $("lb-img").alt = items[lbIndex].title;
   $("lb-cap").textContent = items[lbIndex].title;
+  if ($("lb-counter")) {
+    $("lb-counter").textContent = `${lbIndex + 1} / ${items.length}`;
+  }
   $("lightbox").classList.remove("hidden");
   $("lightbox").classList.add("flex");
 }
@@ -113,6 +209,15 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") stepLightbox(1);
 });
 
+window.addEventListener(
+  "scroll",
+  () => {
+    const nav = $("site-nav");
+    if (nav) nav.classList.toggle("scrolled", window.scrollY > 8);
+  },
+  { passive: true }
+);
+
 function showPage(id, updateHash = true) {
   const validIds = SITE.pages.map(([pid]) => pid);
   const targetId = validIds.includes(id) ? id : "home";
@@ -128,6 +233,7 @@ function showPage(id, updateHash = true) {
     }
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
+  initScrollReveal();
 }
 
 let activeWeek = 4;
@@ -191,7 +297,8 @@ function selectWeek(wk) {
       ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-clay-100 text-clay-700">This week</span>`
       : `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-sand text-stone-500">Upcoming</span>`;
 
-  $("week-detail").innerHTML = `
+  const detail = $("week-detail");
+  detail.innerHTML = `
     <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
       <div class="flex flex-wrap items-center gap-3">
         <span class="font-serif text-2xl font-semibold text-enset-900">Week ${w.week} · ${w.title}</span>
@@ -207,16 +314,18 @@ function selectWeek(wk) {
         : `<p class="text-sm text-stone-400 italic mt-2">Tasks for Week ${w.week} will be logged here as we reach this milestone.</p>`
     }
     <div class="mt-5 pt-4 border-t border-sand flex justify-between gap-2">
-      <button type="button" onclick="selectWeek(${Math.max(1, wk - 1)})" class="px-3.5 py-1.5 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white" ${
+      <button type="button" onclick="selectWeek(${Math.max(1, wk - 1)})" class="btn-tactile px-3.5 py-1.5 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white" ${
         wk === 1 ? "disabled style='opacity:.4'" : ""
       }>&larr; Week ${Math.max(1, wk - 1)}</button>
-      <button type="button" onclick="selectWeek(${Math.min(12, wk + 1)})" class="px-3.5 py-1.5 rounded-full bg-enset-800 text-cream text-xs font-semibold hover:bg-enset-700 cursor-pointer border-0" ${
+      <button type="button" onclick="selectWeek(${Math.min(12, wk + 1)})" class="btn-tactile px-3.5 py-1.5 rounded-full bg-enset-800 text-cream text-xs font-semibold hover:bg-enset-700 cursor-pointer border-0" ${
         wk === 12 ? "disabled style='opacity:.4'" : ""
       }>Week ${Math.min(12, wk + 1)} &rarr;</button>
     </div>`;
+  animatePanel(detail);
 
   $("timeline").innerHTML = SITE.progress
     .map((item) => {
+      const selected = item.week === wk;
       const dot =
         item.status === "done"
           ? "bg-enset-700"
@@ -235,8 +344,10 @@ function selectWeek(wk) {
             .join("")}</ul>`
         : "";
       return `
-      <li onclick="selectWeek(${item.week})" class="ml-8 mb-6 relative cursor-pointer group">
-        <span class="absolute -left-[41px] top-1.5 w-4 h-4 rounded-full ${dot}"></span>
+      <li onclick="selectWeek(${item.week})" class="ml-8 mb-5 p-3 -mx-3 rounded-xl relative cursor-pointer group transition ${
+        selected ? "bg-enset-50/90 border border-clay-600/30" : "hover:bg-white/70 border border-transparent"
+      }">
+        <span class="absolute -left-[29px] top-4 w-4 h-4 rounded-full transition-transform group-hover:scale-110 ${dot}"></span>
         <div class="flex flex-wrap items-center gap-3">
           <h3 class="font-serif text-xl font-semibold group-hover:text-clay-700 transition ${
             item.status === "upcoming" ? "text-stone-400" : "text-enset-900"
@@ -338,9 +449,9 @@ function render() {
 
   $("stats").innerHTML = SITE.stats
     .map(
-      (s) => `
-    <div class="card p-6 shadow-[0_12px_30px_-12px_rgba(20,42,29,0.25)]">
-      <div class="font-serif text-3xl sm:text-4xl font-semibold text-enset-800">${s.value}</div>
+      (s, idx) => `
+    <div class="card card-interactive p-6 shadow-[0_12px_30px_-12px_rgba(20,42,29,0.25)]">
+      <div class="font-serif text-3xl sm:text-4xl font-semibold text-enset-800" data-stat-idx="${idx}">${s.value}</div>
       <div class="mt-1 text-sm text-stone-600">${s.label}</div>
     </div>`
     )
@@ -352,7 +463,7 @@ function render() {
   $("sdgs").innerHTML = SITE.sdgs
     .map(
       (g) => `
-    <a href="https://sdgs.un.org/goals/goal${g.n}" target="_blank" rel="noopener noreferrer" class="card p-4 sm:p-5 flex items-center gap-3.5 sm:gap-4 hover:border-clay-600/60 hover:shadow-md transition group">
+    <a href="https://sdgs.un.org/goals/goal${g.n}" target="_blank" rel="noopener noreferrer" class="card card-interactive p-4 sm:p-5 flex items-center gap-3.5 sm:gap-4 group">
       <img src="${imgSrc(g.img)}" alt="UN SDG ${g.n}: ${g.title}" class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl shadow-sm group-hover:scale-105 transition" />
       <div class="min-w-0">
         <div class="text-sm font-semibold text-enset-900 leading-snug">${g.title}</div>
@@ -374,7 +485,7 @@ function render() {
   $("problems").innerHTML = SITE.problems
     .map(
       (p) => `
-    <li class="card p-5 border-l-4 flex flex-col justify-between gap-4 overflow-hidden" style="border-left-color:#C2703D">
+    <li class="card card-interactive p-5 border-l-4 flex flex-col justify-between gap-4 overflow-hidden" style="border-left-color:#C2703D">
       <div>
         <h4 class="font-semibold text-enset-900">${p.title}</h4>
         <p class="mt-1 text-sm text-stone-600 leading-relaxed">${p.text}</p>
@@ -393,7 +504,7 @@ function render() {
   $("modules").innerHTML = SITE.modules
     .map(
       (m) => `
-    <div class="card p-6 sm:p-7">
+    <div class="card card-interactive p-6 sm:p-7">
       <span class="eyebrow text-clay-600">${m.tag}</span>
       <h4 class="font-serif text-2xl font-semibold text-enset-900 mt-2">${m.title}</h4>
       <p class="mt-2 text-sm text-stone-600">${m.text}</p>
@@ -439,9 +550,11 @@ function render() {
         ? `<a href="${m.link}" target="_blank" rel="noopener noreferrer" class="hover:text-clay-700 underline decoration-clay-600/40 underline-offset-4">${m.name}</a>`
         : m.name;
       return `
-      <div class="card overflow-hidden flex flex-col border-b-4" style="border-bottom-color:#C2703D">
+      <div class="card card-interactive overflow-hidden flex flex-col border-b-4 group" style="border-bottom-color:#C2703D">
         <div class="p-3 pb-0">
-          <img src="${imgSrc(m.img)}" alt="${m.name} — ${m.dept}" loading="lazy" class="w-full aspect-[16/10] portrait-img rounded-xl bg-enset-50" />
+          <div class="overflow-hidden rounded-xl bg-enset-50">
+            <img src="${imgSrc(m.img)}" alt="${m.name} — ${m.dept}" loading="lazy" class="w-full aspect-[16/10] portrait-img group-hover:scale-[1.03] transition duration-300" />
+          </div>
         </div>
         <div class="p-5 text-center">
           <h4 class="font-semibold text-enset-900 text-base">${name}</h4>
@@ -461,13 +574,13 @@ function render() {
       if (g.src) {
         const idx = photoIdx++;
         return `
-        <figure onclick="openLightbox(${idx})" class="card overflow-hidden cursor-pointer group">
+        <figure onclick="openLightbox(${idx})" class="card card-interactive overflow-hidden cursor-pointer group">
           <div class="overflow-hidden">
             <img src="${imgSrc(g.src)}" alt="${g.title}" loading="lazy" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition duration-300" />
           </div>
           <figcaption class="px-4 py-3 text-sm font-medium text-enset-900 flex items-center justify-between gap-2">
             <span>${g.title}</span>
-            <span class="text-xs text-clay-600 shrink-0">Zoom &nearr;</span>
+            <span class="text-xs text-clay-600 shrink-0 group-hover:translate-x-0.5 transition-transform">Zoom &nearr;</span>
           </figcaption>
         </figure>`;
       }
@@ -481,11 +594,26 @@ function render() {
 
   renderContactDirectory();
 
+  // Lightbox touch swipe support for mobile/tablet
+  const lb = $("lightbox");
+  if (lb) {
+    lb.addEventListener("touchstart", (e) => {
+      lbTouchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - lbTouchStartX;
+      if (Math.abs(dx) > 45) stepLightbox(dx < 0 ? 1 : -1);
+    }, { passive: true });
+  }
+
   // Support deep linking via URL hash (e.g. #team, #progress)
   const initialHash = location.hash.replace("#", "");
   if (initialHash) {
     showPage(initialHash, false);
   }
+
+  initScrollReveal();
+  initStatCounters();
 }
 
 let activeContactDept = "All";
@@ -569,7 +697,7 @@ function renderContactCards() {
     .map((m) => {
       const hasEmail = Boolean(m.email && m.email.trim());
       return `
-      <div class="card p-5 flex flex-col justify-between gap-4 hover:border-clay-600/60 hover:shadow-md transition border-b-4" style="border-bottom-color:#C2703D">
+      <div class="card card-interactive p-5 flex flex-col justify-between gap-4 border-b-4" style="border-bottom-color:#C2703D">
         <div class="flex items-start gap-3.5">
           <img src="${imgSrc(m.img)}" alt="${m.name}" loading="lazy" class="w-14 h-14 rounded-2xl portrait-img shrink-0 bg-enset-50 border border-sand" />
           <div class="min-w-0 flex-1">
@@ -603,8 +731,7 @@ function renderContactCards() {
 function renderContactDirectory() {
   const a = SITE.advisor;
   const c = SITE.contact;
-  const allEmails = SITE.team.map((m) => m.email).filter(Boolean);
-  const mailAllHref = allEmails.length ? `mailto:${allEmails.join(",")}` : "";
+  const tgUrl = c.telegram || "";
 
   $("contact").innerHTML = `
     <!-- Featured Advisor & Campus Banner -->
@@ -622,8 +749,13 @@ function renderContactDirectory() {
         <div class="text-sm font-semibold text-cream">${c.institution}</div>
         <div class="text-xs text-enset-100/75">${c.location}</div>
         ${
-          mailAllHref
-            ? `<div class="mt-2"><a href="${mailAllHref}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-clay-600 hover:bg-clay-700 text-white text-xs font-semibold transition">Email Group 67 &nearr;</a></div>`
+          tgUrl
+            ? `<div class="mt-2">
+                 <a href="${tgUrl}" target="_blank" rel="noopener noreferrer" class="btn-tactile inline-flex items-center gap-2 px-4 py-2 rounded-full bg-clay-600 hover:bg-clay-700 text-white text-xs font-semibold shadow-sm">
+                   <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                   <span>Join Group 67 Telegram &nearr;</span>
+                 </a>
+               </div>`
             : ""
         }
       </div>

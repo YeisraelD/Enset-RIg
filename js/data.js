@@ -14,9 +14,9 @@ const SITE = {
   ],
 
   stats: [
-    { value: "20M+", label: "Ethiopians rely on Enset as a staple food" },
-    { value: "90 → 14", label: "days of fermentation with controlled heating" },
-    { value: "< 10,000", label: "ETB total build budget, locally fabricable" }
+    { value: "20M+",    label: "Ethiopians rely on Enset as a staple food", anim: { from: 0, to: 20, prefix: "", suffix: "M+" } },
+    { value: "90 → 14", label: "days of fermentation with controlled heating", anim: { from: 90, to: 14, prefix: "90 → ", suffix: "" } },
+    { value: "< 10,000", label: "ETB total build budget, locally fabricable", anim: { from: 0, to: 10000, prefix: "< ", suffix: "", comma: true } }
   ],
 
   steps: [
@@ -187,6 +187,7 @@ const SITE = {
   contact: {
     institution: "Addis Ababa Science and Technology University (AASTU)",
     course: "IETP4115 · Group 67 · Academic Year 2026/27",
-    location: "AASTU Main Campus, Kilinto, Addis Ababa, Ethiopia"
+    location: "AASTU Main Campus, Kilinto, Addis Ababa, Ethiopia",
+    telegram: "https://t.me/+uk34RQMOcrYzMGI0"
   }
 };

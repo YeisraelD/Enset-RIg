@@ -1,6 +1,6 @@
 /* =====================================================================
  * Enset Scraping & Fermentation Rig — Group 67 (AASTU IETP4115)
- * Visual Identity & Google Sites / GitHub Pages Responsive Styles
+ * Visual Identity, Motion Polish & Google Sites / GitHub Pages Styles
  * ===================================================================== */
 
 html {
@@ -21,6 +21,15 @@ body {
 img {
   display: block;
   max-width: 100%;
+}
+
+/* Sticky Nav Elevation on Scroll */
+.site-nav {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.site-nav.scrolled {
+  box-shadow: 0 8px 24px -14px rgba(15, 32, 22, 0.22);
 }
 
 /* Hero Banner with relative path (works under GitHub Pages subpath) */
@@ -44,30 +53,21 @@ img {
   pointer-events: none;
 }
 
-/* Navigation Tabs */
+/* Navigation Tabs with Smooth Animated Underline */
 .tab-btn {
   position: relative;
   padding: 0.5rem 0.85rem;
   font-size: 0.9rem;
   font-weight: 500;
   color: #4B5548;
-  transition: color 0.15s;
+  transition: color 0.18s ease;
   background: none;
   border: 0;
   cursor: pointer;
   white-space: nowrap;
 }
 
-.tab-btn:hover {
-  color: #1F3D2B;
-}
-
-.tab-btn.active {
-  color: #1F3D2B;
-  font-weight: 700;
-}
-
-.tab-btn.active::after {
+.tab-btn::after {
   content: "";
   position: absolute;
   left: 0.85rem;
@@ -76,12 +76,35 @@ img {
   height: 2px;
   background: #C2703D;
   border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+  opacity: 0;
+}
+
+.tab-btn:hover {
+  color: #1F3D2B;
+}
+
+.tab-btn:hover::after {
+  transform: scaleX(0.65);
+  opacity: 0.55;
+}
+
+.tab-btn.active {
+  color: #1F3D2B;
+  font-weight: 700;
+}
+
+.tab-btn.active::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
 /* Page Transitions */
 .page {
   display: none;
-  animation: fade 0.25s ease-out;
+  animation: fade 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .page.active {
@@ -89,6 +112,22 @@ img {
 }
 
 @keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Smooth Panel Swap (Timeline week detail, Compare panel, Step preview) */
+.panel-swap {
+  animation: panelSwap 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes panelSwap {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -99,11 +138,62 @@ img {
   }
 }
 
-/* Cards & Typography Helpers */
+/* Scroll Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cards & Interactive Hover Elevation */
 .card {
   background: #ffffff;
   border: 1px solid #E7E1D2;
   border-radius: 18px;
+}
+
+.card-interactive {
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease, border-color 0.2s ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -14px rgba(20, 42, 29, 0.18);
+  border-color: rgba(194, 112, 61, 0.45);
+}
+
+/* Micro-interactions for buttons & links */
+.btn-tactile {
+  transition: transform 0.16s ease, background-color 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.btn-tactile:hover {
+  transform: translateY(-1px);
+}
+
+.btn-tactile:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Lightbox Entrance */
+#lightbox .lb-panel {
+  animation: lbIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes lbIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .eyebrow {
@@ -126,8 +216,30 @@ img {
     font-size: 0.82rem;
   }
 
-  .tab-btn.active::after {
+  .tab-btn::after {
     left: 0.65rem;
     right: 0.65rem;
+  }
+}
+
+/* Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.is-visible,
+  .page,
+  .panel-swap,
+  #lightbox .lb-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .card-interactive:hover,
+  .btn-tactile:hover,
+  .btn-tactile:active {
+    transform: none !important;
   }
 }
