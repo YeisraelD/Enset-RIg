@@ -488,9 +488,9 @@ const SITE = {
   progress: [
     { week: 1,  phase: 1, title: "Orientation & Team Formation", dates: "Oct 26 – Nov 01", status: "done",     tasks: ["Course orientation", "Formed Group 67 (10 members)"] },
     { week: 2,  phase: 1, title: "First Advisor Review",         dates: "Nov 02 – Nov 08", status: "done",     tasks: ["First advisor meeting", "Proposed candidate titles: revision requested"] },
-    { week: 3,  phase: 1, title: "Topic Narrowing",              dates: "Nov 09 – Nov 15", status: "done",     tasks: ["Presented new title ideas", "Narrowed down to the Enset processing concept"] },
-    { week: 4,  phase: 1, title: "Title Approved & Form A",      dates: "Nov 16 – Nov 22", status: "current",  tasks: ["Title approved: Enset Scraping & Fermentation Rig", "Form A submitted", "Drafting 10-page proposal"] },
-    { week: 5,  phase: 2, title: "Proposal & Subsystem Sizing",  dates: "Nov 23 – Nov 29", status: "upcoming", tasks: [] },
+    { week: 3,  phase: 1, title: "Nov 13 Team Meeting & Scope",   dates: "Nov 09 – Nov 15", status: "done",     tasks: ["Nov 13 — Group 67 team meeting to align on the Enset processing concept", "Presented narrowed concept to advisor Ins. Getnet Girma"] },
+    { week: 4,  phase: 1, title: "Nov 17 Advisor, Form A & Site", dates: "Nov 16 – Nov 22", status: "done",     tasks: ["Nov 17 — Advisor meeting with Ins. Getnet Girma", "Final title submitted (Form A): Motorized Slider-Crank Enset Scraping Machine with Controlled Fermentation", "Drafted 10-page proposal & 5-page SDA", "Published Group 67 website & all 10 Individual Member Portfolios on GitHub Pages"] },
+    { week: 5,  phase: 2, title: "Proposal & Subsystem Sizing",  dates: "Nov 23 – Nov 29", status: "current",  tasks: [] },
     { week: 6,  phase: 2, title: "CAD, Schematics & BOM",        dates: "Nov 30 – Dec 06", status: "upcoming", tasks: [] },
     { week: 7,  phase: 3, title: "Workshop Fabrication",         dates: "Dec 07 – Dec 13", status: "upcoming", tasks: [] },
     { week: 8,  phase: 3, title: "Mid-Semester Progress Report", dates: "Dec 14 – Dec 20", status: "upcoming", tasks: [] },
@@ -503,10 +503,10 @@ const SITE = {
   // Optional custom logs per member (by exact name). Any member without a custom entry gets an auto-generated log from their role.
   individualLogs: {
     "Yeisrael Dawit": [
-      { week: 1, status: "done",    tasks: ["Attended orientation", "Coordinated Group 67 formation (10 members)"] },
-      { week: 2, status: "done",    tasks: ["Met with advisor Ins. Getnet Girma", "Reviewed initial title feedback"] },
-      { week: 3, status: "done",    tasks: ["Built personal e-Portfolio", "Drafted ESP32 telemetry & PID control concept"] },
-      { week: 4, status: "current", tasks: ["Co-authored Form A & 10-page proposal", "Built Group 67 Enset portfolio site"] }
+      { week: 1, status: "done", tasks: ["Attended IETP4115 orientation", "Joined Group 67 (10 members)"] },
+      { week: 2, status: "done", tasks: ["Met with advisor Ins. Getnet Girma", "Reviewed initial title feedback"] },
+      { week: 3, status: "done", tasks: ["Nov 13 — Participated in Group 67 team meeting on Enset concept", "Built & published personal e-Portfolio", "Drafted ESP32 telemetry & PID control concept"] },
+      { week: 4, status: "done", tasks: ["Nov 17 — Met with advisor Ins. Getnet Girma on software engineering scope", "Finalized & submitted Form A final title", "Co-authored 10-page proposal & 5-page SDA", "Built, documented & deployed Group 67 website + 10 Individual Member Portfolios on GitHub Pages (Enset-RIg)"] }
     ]
   },
 
