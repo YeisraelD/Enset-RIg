@@ -42,6 +42,6 @@ Open `js/data.js` and edit the `SITE` object:
 2. Go to **Pages → `+` → New full page embed** (recommended for full-width layout) **or** insert an **Embed** block on a page.
 3. Choose **By URL** (not *Embed code*) and paste your deployed GitHub Pages URL:
    ```text
-   https://<your-github-username>.github.io/enset-rig/
+   https://yeisraeld.github.io/Enset-RIg/
    ```
 4. Select **Whole page** and click **Insert**, then **Publish**.
