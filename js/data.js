@@ -129,7 +129,6 @@ const SITE = {
 
   // Add each member's email and portfolio link when ready.
   team: [
-    { name: "Yeisrael Dawit",   dept: "Software Engineering",          role: "Firmware & Embedded Control",    img: "assets/images/team/yeisrael.jpg", email: "yeisraeld@gmail.com", link: "https://sites.google.com/view/yeisraeld/home" },
     { name: "Tsion Anemaw",     dept: "Software Engineering",          role: "Data Logging & Interface",       img: "assets/images/team/tsion.jpg",    email: "",                    link: "" },
     { name: "Tewodros Brhanu",  dept: "Civil Engineering",             role: "Structural Frame & Damping",     img: "assets/images/team/tewodros.jpg", email: "",                    link: "" },
     { name: "Yosef Gebre",      dept: "Civil Engineering",             role: "Hydraulics & Settling Tank",     img: "assets/images/team/yosef.jpg",    email: "",                    link: "" },
@@ -138,7 +137,8 @@ const SITE = {
     { name: "Yabets Nigatu",    dept: "Electromechanical Engineering", role: "Blade Spring & Press",           img: "assets/images/team/yabets.jpg",   email: "",                    link: "" },
     { name: "Rahel Ewnetu",     dept: "Electrical & Computer Eng.",    role: "Power Stage & Protection",       img: "assets/images/team/rahel.jpg",    email: "",                    link: "" },
     { name: "Dawit Behailu",    dept: "Electrical & Computer Eng.",    role: "Sensors & Signal Acquisition",   img: "assets/images/team/dawit.jpg",    email: "",                    link: "" },
-    { name: "Meron Feleke",     dept: "Chemical Engineering",          role: "Fermentation & Acidity Testing", img: "assets/images/team/meron.jpg",    email: "",                    link: "" }
+    { name: "Meron Feleke",     dept: "Chemical Engineering",          role: "Fermentation & Acidity Testing", img: "assets/images/team/meron.jpg",    email: "",                    link: "" },
+    { name: "Yeisrael Dawit",   dept: "Software Engineering",          role: "Firmware & Embedded Control",    img: "assets/images/team/yeisrael.jpg", email: "yeisraeld@gmail.com", link: "https://sites.google.com/view/yeisraeld/home" }
   ],
 
   // status: "done" | "current" | "upcoming"
