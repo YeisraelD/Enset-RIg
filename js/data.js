@@ -14,7 +14,7 @@ const SITE = {
   ],
 
   stats: [
-    { value: "20M+",    label: "Ethiopians rely on Enset as a staple food", anim: { from: 0, to: 20, prefix: "", suffix: "M+" } },
+    { value: "20M+", label: "Ethiopians rely on Enset as a staple food", anim: { from: 0, to: 20, prefix: "", suffix: "M+" } },
     { value: "90 → 14", label: "days of fermentation with controlled heating", anim: { from: 90, to: 14, prefix: "90 → ", suffix: "" } },
     { value: "< 10,000", label: "ETB total build budget, locally fabricable", anim: { from: 0, to: 10000, prefix: "< ", suffix: "", comma: true } }
   ],
@@ -72,9 +72,9 @@ const SITE = {
   },
 
   sdgs: [
-    { n: 2,  title: "Zero Hunger",            img: "assets/icons/sdg2.svg",  note: "Food security for 20M+ Ethiopians", color: "#DDA63A" },
-    { n: 5,  title: "Gender Equality",        img: "assets/icons/sdg5.svg",  note: "Ends exhausting manual scraping",  color: "#FF3A21" },
-    { n: 9,  title: "Industry & Innovation",  img: "assets/icons/sdg9.svg",  note: "Locally built workshop machinery", color: "#FD6925" },
+    { n: 2, title: "Zero Hunger", img: "assets/icons/sdg2.svg", note: "Food security for 20M+ Ethiopians", color: "#DDA63A" },
+    { n: 5, title: "Gender Equality", img: "assets/icons/sdg5.svg", note: "Ends exhausting manual scraping", color: "#FF3A21" },
+    { n: 9, title: "Industry & Innovation", img: "assets/icons/sdg9.svg", note: "Locally built workshop machinery", color: "#FD6925" },
     { n: 12, title: "Responsible Production", img: "assets/icons/sdg12.svg", note: "Clean Kacha fibre & Bulla starch", color: "#BF8B2E" }
   ],
 
@@ -303,7 +303,7 @@ const SITE = {
     {
       slug: "yabets-nigatu",
       name: "Yabets Nigatu",
-      id: "ETS 1673/16",
+      id: "ETS 1396/16",
       dept: "Electromechanical Engineering",
       role: "Blade Spring & Press",
       shortIntro: "Electromechanical Engineering student developing the hinged spring-loaded scraping blade, motor shaft coupling, and thermal mounting.",
@@ -486,18 +486,18 @@ const SITE = {
   ],
 
   progress: [
-    { week: 1,  phase: 1, title: "Orientation & Team Formation", dates: "Oct 26 – Nov 01", status: "done",     tasks: ["Course orientation", "Formed Group 67 (10 members)"] },
-    { week: 2,  phase: 1, title: "First Advisor Review",         dates: "Nov 02 – Nov 08", status: "done",     tasks: ["First advisor meeting", "Proposed candidate titles: revision requested"] },
-    { week: 3,  phase: 1, title: "Nov 13 Team Meeting & Scope",   dates: "Nov 09 – Nov 15", status: "done",     tasks: ["Nov 13 — Group 67 team meeting to align on the Enset processing concept", "Presented narrowed concept to advisor Ins. Getnet Girma"] },
-    { week: 4,  phase: 1, title: "Nov 17 Advisor, Form A & Site", dates: "Nov 16 – Nov 22", status: "done",     tasks: ["Nov 17 — Advisor meeting with Ins. Getnet Girma", "Final title submitted (Form A): Motorized Slider-Crank Enset Scraping Machine with Controlled Fermentation", "Drafted 10-page proposal & 5-page SDA", "Published Group 67 website & all 10 Individual Member Portfolios on GitHub Pages"] },
-    { week: 5,  phase: 2, title: "Proposal & Subsystem Sizing",  dates: "Nov 23 – Nov 29", status: "current",  tasks: [] },
-    { week: 6,  phase: 2, title: "CAD, Schematics & BOM",        dates: "Nov 30 – Dec 06", status: "upcoming", tasks: [] },
-    { week: 7,  phase: 3, title: "Workshop Fabrication",         dates: "Dec 07 – Dec 13", status: "upcoming", tasks: [] },
-    { week: 8,  phase: 3, title: "Mid-Semester Progress Report", dates: "Dec 14 – Dec 20", status: "upcoming", tasks: [] },
-    { week: 9,  phase: 3, title: "Bioreactor & ESP32 Wiring",    dates: "Dec 21 – Dec 27", status: "upcoming", tasks: [] },
-    { week: 10, phase: 3, title: "Full System Integration",      dates: "Dec 28 – Jan 03", status: "upcoming", tasks: [] },
-    { week: 11, phase: 4, title: "Prototype & Kocho Trials",     dates: "Jan 04 – Jan 10", status: "upcoming", tasks: [] },
-    { week: 12, phase: 4, title: "Poster, Demo & Final Report",  dates: "Jan 11 – Jan 17", status: "upcoming", tasks: [] }
+    { week: 1, phase: 1, title: "Orientation & Team Formation", dates: "Oct 26 – Nov 01", status: "done", tasks: ["Course orientation", "Formed Group 67 (10 members)"] },
+    { week: 2, phase: 1, title: "First Advisor Review", dates: "Nov 02 – Nov 08", status: "done", tasks: ["First advisor meeting", "Proposed candidate titles: revision requested"] },
+    { week: 3, phase: 1, title: "Nov 13 Team Meeting & Scope", dates: "Nov 09 – Nov 15", status: "done", tasks: ["Nov 13 — Group 67 team meeting to align on the Enset processing concept", "Presented narrowed concept to advisor Ins. Getnet Girma"] },
+    { week: 4, phase: 1, title: "Nov 17 Advisor, Form A & Site", dates: "Nov 16 – Nov 22", status: "done", tasks: ["Nov 17 — Advisor meeting with Ins. Getnet Girma", "Final title submitted (Form A): Motorized Slider-Crank Enset Scraping Machine with Controlled Fermentation", "Drafted 10-page proposal & 5-page SDA", "Published Group 67 website & all 10 Individual Member Portfolios on GitHub Pages"] },
+    { week: 5, phase: 2, title: "Proposal & Subsystem Sizing", dates: "Nov 23 – Nov 29", status: "current", tasks: [] },
+    { week: 6, phase: 2, title: "CAD, Schematics & BOM", dates: "Nov 30 – Dec 06", status: "upcoming", tasks: [] },
+    { week: 7, phase: 3, title: "Workshop Fabrication", dates: "Dec 07 – Dec 13", status: "upcoming", tasks: [] },
+    { week: 8, phase: 3, title: "Mid-Semester Progress Report", dates: "Dec 14 – Dec 20", status: "upcoming", tasks: [] },
+    { week: 9, phase: 3, title: "Bioreactor & ESP32 Wiring", dates: "Dec 21 – Dec 27", status: "upcoming", tasks: [] },
+    { week: 10, phase: 3, title: "Full System Integration", dates: "Dec 28 – Jan 03", status: "upcoming", tasks: [] },
+    { week: 11, phase: 4, title: "Prototype & Kocho Trials", dates: "Jan 04 – Jan 10", status: "upcoming", tasks: [] },
+    { week: 12, phase: 4, title: "Poster, Demo & Final Report", dates: "Jan 11 – Jan 17", status: "upcoming", tasks: [] }
   ],
 
   // Optional custom logs per member (by exact name). Any member without a custom entry gets an auto-generated log from their role.
