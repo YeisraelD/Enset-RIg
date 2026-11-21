@@ -719,7 +719,7 @@ function renderContactCards() {
               <a href="mailto:${m.email}" class="text-xs font-semibold text-enset-700 hover:text-clay-700 underline underline-offset-4 truncate">${m.email}</a>
               <button type="button" onclick="copyEmail('${m.email}', this)" class="px-2.5 py-1 rounded-full border border-sand bg-cream hover:bg-sand/60 text-[11px] font-semibold text-enset-900 transition cursor-pointer shrink-0">Copy</button>
             </div>`
-              : `<span class="text-xs text-stone-400 italic">Email will be added soon</span>`
+              : ""
           }
           <a href="team/${m.slug}/" class="text-[11px] font-semibold text-clay-700 hover:text-enset-900 inline-flex items-center gap-1">View Portfolio &rarr;</a>
         </div>

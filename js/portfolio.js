@@ -9,10 +9,8 @@
   const prefersReducedMotion = () =>
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function renderPills(items, placeholder) {
-    if (!items || !items.length) {
-      return `<p class="text-xs text-stone-400 italic">${placeholder}</p>`;
-    }
+  function renderPills(items) {
+    if (!items || !items.length) return "";
     return `<div class="flex flex-wrap gap-2">${items
       .map(
         (item) =>
@@ -21,10 +19,8 @@
       .join("")}</div>`;
   }
 
-  function renderBulletList(items, placeholder) {
-    if (!items || !items.length) {
-      return `<p class="text-sm text-stone-400 italic">${placeholder}</p>`;
-    }
+  function renderBulletList(items) {
+    if (!items || !items.length) return "";
     return `<ul class="space-y-2.5">${items
       .map(
         (item) =>
@@ -113,6 +109,25 @@
       );
     }
 
+    const skillCards = [
+      ["Technical Skills", skills.technical],
+      ["Engineering Skills", skills.engineering],
+      ["Software & Tools", skills.tools],
+      ["Areas of Interest", skills.interests]
+    ]
+      .filter(([, list]) => list && list.length)
+      .map(
+        ([title, list]) => `
+        <div class="card card-interactive p-6">
+          <h3 class="font-serif text-lg font-semibold text-enset-900 mb-3">${title}</h3>
+          ${renderPills(list)}
+        </div>`
+      )
+      .join("");
+
+    const hasExperience = Boolean((p.experience && p.experience.length) || links.github);
+    const tgUrl = SITE.contact && SITE.contact.telegram ? SITE.contact.telegram : "";
+
     $("portfolio-root").innerHTML = `
       <!-- STICKY NAVIGATION -->
       <nav id="site-nav" class="site-nav sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-sand">
@@ -155,7 +170,7 @@
               <div class="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-2.5">
                 <a href="#skills" class="btn-tactile px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-cream text-xs font-semibold">Skills</a>
                 <a href="#contributions" class="btn-tactile px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-cream text-xs font-semibold">Contributions</a>
-                <a href="#experience" class="btn-tactile px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-cream text-xs font-semibold">Experience</a>
+                ${hasExperience ? `<a href="#experience" class="btn-tactile px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-cream text-xs font-semibold">Experience</a>` : ""}
                 <a href="#about" class="btn-tactile px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-cream text-xs font-semibold">About</a>
                 ${
                   m.email
@@ -172,42 +187,27 @@
 
         <!-- B. SKILLS & EXPERTISE -->
         <section id="skills" class="reveal">
-          <p class="eyebrow text-clay-600 mb-2">Section 01 · Capabilities</p>
+          <p class="eyebrow text-clay-600 mb-2">Capabilities</p>
           <h2 class="font-serif text-3xl font-semibold text-enset-900 mb-6">Skills &amp; Expertise</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div class="card card-interactive p-6">
-              <h3 class="font-serif text-lg font-semibold text-enset-900 mb-3">Technical Skills</h3>
-              ${renderPills(skills.technical, "Placeholder — member can add technical skills in js/data.js.")}
-            </div>
-            <div class="card card-interactive p-6">
-              <h3 class="font-serif text-lg font-semibold text-enset-900 mb-3">Engineering Skills</h3>
-              ${renderPills(skills.engineering, "Placeholder — member can add engineering skills in js/data.js.")}
-            </div>
-            <div class="card card-interactive p-6">
-              <h3 class="font-serif text-lg font-semibold text-enset-900 mb-3">Software &amp; Tools</h3>
-              ${renderPills(skills.tools, "Placeholder — member can list CAD, IDE, simulation, or lab tools in js/data.js.")}
-            </div>
-            <div class="card card-interactive p-6">
-              <h3 class="font-serif text-lg font-semibold text-enset-900 mb-3">Areas of Interest</h3>
-              ${renderPills(skills.interests, "Placeholder — member can add engineering interests in js/data.js.")}
-            </div>
+            ${skillCards}
           </div>
         </section>
 
         <!-- C. PROJECT CONTRIBUTIONS -->
         <section id="contributions" class="reveal">
-          <p class="eyebrow text-clay-600 mb-2">Section 02 · Enset Rig Capstone</p>
+          <p class="eyebrow text-clay-600 mb-2">Enset Rig Capstone</p>
           <h2 class="font-serif text-3xl font-semibold text-enset-900 mb-6">Project Contributions</h2>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
             <div class="lg:col-span-7 card card-interactive p-6 sm:p-7 border-l-4" style="border-left-color:#C2703D">
               <h3 class="font-serif text-xl font-semibold text-enset-900 mb-4">Responsibilities &amp; Technical Contributions</h3>
-              ${renderBulletList(contrib.responsibilities, "Placeholder — specific Enset Rig responsibilities will be updated here.")}
+              ${renderBulletList(contrib.responsibilities)}
             </div>
 
             <div class="lg:col-span-5 card card-interactive p-6 sm:p-7 bg-enset-50/70">
               <h3 class="font-serif text-xl font-semibold text-enset-900 mb-4">Problems Helped Solve</h3>
-              ${renderBulletList(contrib.problemsSolved, "Placeholder — key engineering challenges addressed will be added here.")}
+              ${renderBulletList(contrib.problemsSolved)}
             </div>
           </div>
 
@@ -238,9 +238,12 @@
           </div>
         </section>
 
+        ${
+          hasExperience
+            ? `
         <!-- D. EXPERIENCE -->
         <section id="experience" class="reveal">
-          <p class="eyebrow text-clay-600 mb-2">Section 03 · Background</p>
+          <p class="eyebrow text-clay-600 mb-2">Background</p>
           <h2 class="font-serif text-3xl font-semibold text-enset-900 mb-6">Projects &amp; Experience</h2>
           <div class="card card-interactive p-6 sm:p-7">
             <div class="flex flex-wrap items-center justify-between gap-4">
@@ -248,10 +251,8 @@
                 <h3 class="font-serif text-xl font-semibold text-enset-900 mb-2">Previous Projects &amp; Experience</h3>
                 ${
                   p.experience && p.experience.length
-                    ? renderBulletList(p.experience, "")
-                    : links.github
-                    ? `<p class="text-sm text-stone-600 leading-relaxed">Browse my software engineering projects, embedded firmware work, and open-source repositories on GitHub.</p>`
-                    : `<p class="text-sm text-stone-400 italic">Placeholder — member can add previous academic/personal projects or internships in js/data.js.</p>`
+                    ? renderBulletList(p.experience)
+                    : `<p class="text-sm text-stone-600 leading-relaxed">Browse software engineering projects, embedded firmware work, and open-source repositories on GitHub.</p>`
                 }
               </div>
               ${
@@ -264,20 +265,18 @@
               }
             </div>
           </div>
-        </section>
+        </section>`
+            : ""
+        }
 
         <!-- E. PERSONAL INFORMATION -->
         <section id="about" class="reveal">
-          <p class="eyebrow text-clay-600 mb-2">Section 04 · Profile</p>
+          <p class="eyebrow text-clay-600 mb-2">Profile</p>
           <h2 class="font-serif text-3xl font-semibold text-enset-900 mb-6">Personal Information</h2>
           <div class="card p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-7">
               <h3 class="font-serif text-xl font-semibold text-enset-900 mb-3">Biography</h3>
-              ${
-                p.bio
-                  ? `<p class="text-sm text-stone-700 leading-relaxed">${p.bio}</p>`
-                  : `<p class="text-sm text-stone-400 italic leading-relaxed">Placeholder — ${m.name} can add a short personal biography in js/data.js.</p>`
-              }
+              <p class="text-sm text-stone-700 leading-relaxed">${p.bio || m.shortIntro}</p>
             </div>
             <div class="lg:col-span-5 lg:border-l lg:border-sand lg:pl-7 space-y-4">
               <div>
@@ -289,12 +288,14 @@
                 ${
                   m.email
                     ? `<p class="text-xs text-stone-600 mb-3">Email: <a href="mailto:${m.email}" class="text-enset-700 font-semibold underline underline-offset-4">${m.email}</a></p>`
-                    : `<p class="text-xs text-stone-400 italic mb-3">Email placeholder — to be added in js/data.js.</p>`
+                    : ""
                 }
                 ${
                   linkButtons.length
                     ? `<div class="flex flex-wrap gap-2">${linkButtons.join("")}</div>`
-                    : `<p class="text-xs text-stone-400 italic">Optional GitHub / LinkedIn links can be added in js/data.js.</p>`
+                    : tgUrl
+                    ? `<a href="${tgUrl}" target="_blank" rel="noopener noreferrer" class="btn-tactile inline-flex items-center gap-2 px-4 py-2 rounded-full bg-enset-800 hover:bg-clay-600 text-cream text-xs font-semibold">Group 67 Telegram &nearr;</a>`
+                    : ""
                 }
               </div>
             </div>
