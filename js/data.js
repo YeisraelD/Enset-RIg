@@ -127,18 +127,18 @@ const SITE = {
     office: "Block 64, 4th Floor"
   },
 
-  // Add each member's portfolio link in "link" when it is ready.
+  // Add each member's email and portfolio link when ready.
   team: [
-    { name: "Yeisrael Dawit",   dept: "Software Engineering",          role: "Team Lead · Firmware & Control", img: "assets/images/team/yeisrael.jpg", link: "https://sites.google.com/view/yeisraeld/home" },
-    { name: "Tsion Anemaw",     dept: "Software Engineering",          role: "Data Logging & Interface",       img: "assets/images/team/tsion.jpg",    link: "" },
-    { name: "Tewodros Brhanu",  dept: "Civil Engineering",             role: "Structural Frame & Damping",     img: "assets/images/team/tewodros.jpg", link: "" },
-    { name: "Yosef Gebre",      dept: "Civil Engineering",             role: "Hydraulics & Settling Tank",     img: "assets/images/team/yosef.jpg",    link: "" },
-    { name: "Habtamu Mulugeta", dept: "Mechanical Engineering",        role: "Crank, Drive & Housing",         img: "assets/images/team/habtamu.jpg",  link: "" },
-    { name: "Natnael Tadesse",  dept: "Architecture",                  role: "Housing & Ergonomic Layout",     img: "assets/images/team/natnael.jpg",  link: "" },
-    { name: "Yabets Nigatu",    dept: "Electromechanical Engineering", role: "Blade Spring & Press",           img: "assets/images/team/yabets.jpg",   link: "" },
-    { name: "Rahel Ewnetu",     dept: "Electrical & Computer Eng.",    role: "Power Stage & Protection",       img: "assets/images/team/rahel.jpg",    link: "" },
-    { name: "Dawit Behailu",    dept: "Electrical & Computer Eng.",    role: "Sensors & Signal Acquisition",   img: "assets/images/team/dawit.jpg",    link: "" },
-    { name: "Meron Feleke",     dept: "Chemical Engineering",          role: "Fermentation & Acidity Testing", img: "assets/images/team/meron.jpg",    link: "" }
+    { name: "Yeisrael Dawit",   dept: "Software Engineering",          role: "Firmware & Embedded Control",    img: "assets/images/team/yeisrael.jpg", email: "yeisraeld@gmail.com", link: "https://sites.google.com/view/yeisraeld/home" },
+    { name: "Tsion Anemaw",     dept: "Software Engineering",          role: "Data Logging & Interface",       img: "assets/images/team/tsion.jpg",    email: "",                    link: "" },
+    { name: "Tewodros Brhanu",  dept: "Civil Engineering",             role: "Structural Frame & Damping",     img: "assets/images/team/tewodros.jpg", email: "",                    link: "" },
+    { name: "Yosef Gebre",      dept: "Civil Engineering",             role: "Hydraulics & Settling Tank",     img: "assets/images/team/yosef.jpg",    email: "",                    link: "" },
+    { name: "Habtamu Mulugeta", dept: "Mechanical Engineering",        role: "Crank, Drive & Housing",         img: "assets/images/team/habtamu.jpg",  email: "",                    link: "" },
+    { name: "Natnael Tadesse",  dept: "Architecture",                  role: "Housing & Ergonomic Layout",     img: "assets/images/team/natnael.jpg",  email: "",                    link: "" },
+    { name: "Yabets Nigatu",    dept: "Electromechanical Engineering", role: "Blade Spring & Press",           img: "assets/images/team/yabets.jpg",   email: "",                    link: "" },
+    { name: "Rahel Ewnetu",     dept: "Electrical & Computer Eng.",    role: "Power Stage & Protection",       img: "assets/images/team/rahel.jpg",    email: "",                    link: "" },
+    { name: "Dawit Behailu",    dept: "Electrical & Computer Eng.",    role: "Sensors & Signal Acquisition",   img: "assets/images/team/dawit.jpg",    email: "",                    link: "" },
+    { name: "Meron Feleke",     dept: "Chemical Engineering",          role: "Fermentation & Acidity Testing", img: "assets/images/team/meron.jpg",    email: "",                    link: "" }
   ],
 
   // status: "done" | "current" | "upcoming"
@@ -185,6 +185,8 @@ const SITE = {
   ],
 
   contact: {
-    lead: { name: "Yeisrael Dawit (Team Lead)", email: "yeisraeld@gmail.com" }
+    institution: "Addis Ababa Science and Technology University (AASTU)",
+    course: "IETP4115 · Group 67 · Academic Year 2026/27",
+    location: "AASTU Main Campus, Kilinto, Addis Ababa, Ethiopia"
   }
 };

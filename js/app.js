@@ -470,24 +470,182 @@ function render() {
     })
     .join("");
 
-  const c = SITE.contact.lead;
-  $("contact").innerHTML = `
-    <div class="card p-7">
-      <span class="eyebrow text-clay-600">Team</span>
-      <h3 class="font-serif text-2xl font-semibold text-enset-900 mt-2">${c.name}</h3>
-      <a href="mailto:${c.email}" class="mt-3 inline-block text-enset-700 font-semibold underline underline-offset-4 break-all">${c.email}</a>
-    </div>
-    <div class="card p-7">
-      <span class="eyebrow text-clay-600">Advisor</span>
-      <h3 class="font-serif text-2xl font-semibold text-enset-900 mt-2">${a.name}</h3>
-      <p class="mt-3 text-sm text-stone-600">${a.dept}<br />${a.office}</p>
-    </div>`;
+  renderContactDirectory();
 
   // Support deep linking via URL hash (e.g. #team, #progress)
   const initialHash = location.hash.replace("#", "");
   if (initialHash) {
     showPage(initialHash, false);
   }
+}
+
+let activeContactDept = "All";
+let contactQuery = "";
+
+function copyEmail(email, btn) {
+  if (!email) return;
+  const done = () => {
+    const prev = btn.textContent;
+    btn.textContent = "Copied ✓";
+    btn.classList.add("bg-enset-800", "text-cream", "border-enset-800");
+    setTimeout(() => {
+      btn.textContent = prev;
+      btn.classList.remove("bg-enset-800", "text-cream", "border-enset-800");
+    }, 1500);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email).then(done).catch(done);
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = email;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (_) {}
+    document.body.removeChild(ta);
+    done();
+  }
+}
+
+function setContactDept(dept) {
+  activeContactDept = dept;
+  renderContactCards();
+  renderContactFilters();
+}
+
+function onContactSearch(val) {
+  contactQuery = val.trim().toLowerCase();
+  renderContactCards();
+}
+
+function renderContactFilters() {
+  const wrap = $("contact-filters");
+  if (!wrap) return;
+  const depts = ["All", ...new Set(SITE.team.map((m) => m.dept))];
+  wrap.innerHTML = depts
+    .map((d) => {
+      const on = d === activeContactDept;
+      const shortLabel = d === "All"
+        ? `All (${SITE.team.length})`
+        : d.replace(" Engineering", "").replace(" Eng.", "");
+      return `<button type="button" onclick="setContactDept('${d.replace(/'/g, "\\'")}')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold border transition cursor-pointer ${
+        on
+          ? "bg-enset-800 text-cream border-enset-800 shadow-sm"
+          : "bg-white text-stone-600 border-sand hover:border-clay-600/60 hover:text-enset-900"
+      }">${shortLabel}</button>`;
+    })
+    .join("");
+}
+
+function renderContactCards() {
+  const grid = $("contact-team-grid");
+  if (!grid) return;
+
+  const filtered = SITE.team.filter((m) => {
+    const deptOk = activeContactDept === "All" || m.dept === activeContactDept;
+    const qOk =
+      !contactQuery ||
+      m.name.toLowerCase().includes(contactQuery) ||
+      m.dept.toLowerCase().includes(contactQuery) ||
+      m.role.toLowerCase().includes(contactQuery) ||
+      (m.email && m.email.toLowerCase().includes(contactQuery));
+    return deptOk && qOk;
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="col-span-full card p-8 text-center text-sm text-stone-500">No team members match your filter.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered
+    .map((m) => {
+      const hasEmail = Boolean(m.email && m.email.trim());
+      return `
+      <div class="card p-5 flex flex-col justify-between gap-4 hover:border-clay-600/60 hover:shadow-md transition border-b-4" style="border-bottom-color:#C2703D">
+        <div class="flex items-start gap-3.5">
+          <img src="${imgSrc(m.img)}" alt="${m.name}" loading="lazy" class="w-14 h-14 rounded-2xl portrait-img shrink-0 bg-enset-50 border border-sand" />
+          <div class="min-w-0 flex-1">
+            <h4 class="font-serif text-lg font-semibold text-enset-900 leading-snug truncate">${m.name}</h4>
+            <span class="inline-block mt-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-enset-50 text-enset-800 border border-enset-100">${m.dept}</span>
+            <p class="text-xs text-stone-500 mt-1.5 leading-snug">${m.role}</p>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-sand flex flex-col gap-2">
+          ${
+            hasEmail
+              ? `
+            <div class="flex items-center justify-between gap-2">
+              <a href="mailto:${m.email}" class="text-xs font-semibold text-enset-700 hover:text-clay-700 underline underline-offset-4 truncate">${m.email}</a>
+              <button type="button" onclick="copyEmail('${m.email}', this)" class="px-2.5 py-1 rounded-full border border-sand bg-cream hover:bg-sand/60 text-[11px] font-semibold text-enset-900 transition cursor-pointer shrink-0">Copy</button>
+            </div>`
+              : `<span class="text-xs text-stone-400 italic">Email will be added soon</span>`
+          }
+          ${
+            m.link
+              ? `<a href="${m.link}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-clay-700 hover:text-clay-600 inline-flex items-center gap-1">Personal e-Portfolio &nearr;</a>`
+              : ""
+          }
+        </div>
+      </div>`;
+    })
+    .join("");
+}
+
+function renderContactDirectory() {
+  const a = SITE.advisor;
+  const c = SITE.contact;
+  const allEmails = SITE.team.map((m) => m.email).filter(Boolean);
+  const mailAllHref = allEmails.length ? `mailto:${allEmails.join(",")}` : "";
+
+  $("contact").innerHTML = `
+    <!-- Featured Advisor & Campus Banner -->
+    <div class="card p-6 sm:p-8 bg-enset-800 border-enset-800 text-cream grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-7 flex items-center gap-4">
+        <span class="w-14 h-14 rounded-2xl bg-clay-600 text-white font-serif font-semibold text-lg flex items-center justify-center shrink-0 shadow-md">GG</span>
+        <div>
+          <span class="eyebrow text-clay-100/80">Project Advisor</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-cream mt-0.5">${a.name}</h3>
+          <p class="text-sm text-enset-100/85 mt-1">${a.dept} · ${a.office}</p>
+        </div>
+      </div>
+      <div class="md:col-span-5 md:border-l md:border-white/15 md:pl-6 flex flex-col gap-2">
+        <span class="eyebrow text-clay-100/80">Institution</span>
+        <div class="text-sm font-semibold text-cream">${c.institution}</div>
+        <div class="text-xs text-enset-100/75">${c.location}</div>
+        ${
+          mailAllHref
+            ? `<div class="mt-2"><a href="${mailAllHref}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-clay-600 hover:bg-clay-700 text-white text-xs font-semibold transition">Email Group 67 &nearr;</a></div>`
+            : ""
+        }
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="card p-4 sm:p-5 bg-enset-50/70 flex flex-col gap-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="eyebrow text-clay-600">Group 67 Directory</span>
+          <h3 class="font-serif text-2xl font-semibold text-enset-900 mt-0.5">All 10 Team Members</h3>
+        </div>
+        <div class="w-full sm:w-64">
+          <input
+            type="search"
+            oninput="onContactSearch(this.value)"
+            placeholder="Search name, role, or email..."
+            aria-label="Search team contacts"
+            class="w-full px-4 py-2 rounded-full bg-white border border-sand text-xs text-ink placeholder:text-stone-400 focus:outline-none focus:border-clay-600"
+          />
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2" id="contact-filters"></div>
+    </div>
+
+    <!-- Dynamic 10-Member Contact Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="contact-team-grid"></div>
+  `;
+
+  renderContactFilters();
+  renderContactCards();
 }
 
 window.addEventListener("hashchange", () => {
