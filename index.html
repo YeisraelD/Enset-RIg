@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Group 67 — Enset Scraping &amp; Fermentation Rig | AASTU IETP4115</title>
+  <meta name="description" content="Design of a Motorized Slider-Crank Enset Scraping Machine with Controlled Fermentation — Group 67, Addis Ababa Science and Technology University (IETP4115)." />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (typeof tailwind !== "undefined") {
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              enset: { 950: "#0F2016", 900: "#142A1D", 800: "#1F3D2B", 700: "#2C5A3E", 600: "#3D7352", 100: "#E3ECE4", 50: "#F1F5F0" },
+              clay: { 600: "#C2703D", 700: "#A55A2C", 100: "#F6E4D6" },
+              cream: "#F7F4EC",
+              sand: "#EDE6D6",
+              ink: "#1C1F1A"
+            },
+            fontFamily: {
+              serif: ["Fraunces", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"]
+            }
+          }
+        }
+      };
+    }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ============================ NAV ============================ -->
+  <nav class="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-sand">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+      <button type="button" onclick="showPage('home')" class="flex items-center gap-3 bg-transparent border-0 cursor-pointer p-0 text-left shrink-0">
+        <span class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-sand shadow-sm p-1 flex items-center justify-center overflow-hidden shrink-0">
+          <img id="site-logo" src="assets/images/logo.png" alt="Group 67 Enset Rig Logo" class="w-full h-full object-contain" />
+        </span>
+        <span>
+          <span class="block font-serif font-semibold text-enset-900 leading-tight">Enset Rig</span>
+          <span class="block text-[11px] text-stone-500">AASTU · IETP4115 · Group 67</span>
+        </span>
+      </button>
+      <div class="flex flex-wrap items-center gap-x-0.5 gap-y-1" id="nav" role="navigation" aria-label="Main navigation"></div>
+    </div>
+  </nav>
+
+  <!-- ============================ MAIN ============================ -->
+  <main class="flex-1 w-full">
+
+    <!-- ========== HOME ========== -->
+    <section id="page-home" class="page active">
+      <header class="hero text-cream">
+        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-20 sm:pt-16 sm:pb-32">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div class="lg:col-span-6">
+              <p class="eyebrow text-clay-600 mb-4">AASTU · Integrated Engineering Team Project · Group 67</p>
+              <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.08]">
+                Enset Scraping &amp; Fermentation Rig
+              </h1>
+              <p class="mt-5 text-base sm:text-lg text-enset-100/90 max-w-xl leading-relaxed">
+                A low-cost machine that replaces hard manual Enset scraping and cuts Kocho fermentation from months to weeks.
+              </p>
+              <p class="mt-3 text-sm text-enset-100/60 max-w-xl italic">
+                Design of a Motorized Slider-Crank Enset Scraping Machine with Controlled Fermentation
+              </p>
+              <div class="mt-7 sm:mt-8 flex flex-wrap gap-3">
+                <button type="button" onclick="showPage('project')" class="px-5 py-3 rounded-full bg-clay-600 hover:bg-clay-700 text-white text-sm font-semibold transition cursor-pointer border-0">Explore the project</button>
+                <button type="button" onclick="showPage('team')" class="px-5 py-3 rounded-full border border-cream/30 hover:bg-white/10 text-cream text-sm font-semibold transition cursor-pointer bg-transparent">Meet the team</button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6">
+              <div class="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-enset-950 aspect-[4/3] w-full">
+                <img id="hero-showcase-img" src="assets/images/hero-rain.jpg" alt="Rain on Enset leaf" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-enset-950/90 via-enset-950/15 to-transparent"></div>
+                <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-enset-950/75 backdrop-blur-md border border-white/15 rounded-2xl p-3 sm:p-4 flex items-center gap-3">
+                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white p-1 shrink-0 flex items-center justify-center">
+                    <img id="hero-badge-logo" src="assets/images/logo.png" alt="Group 67 Logo" class="w-full h-full object-contain" />
+                  </span>
+                  <div class="min-w-0">
+                    <div class="text-xs font-bold text-cream truncate">Ensete ventricosum</div>
+                    <div class="text-[11px] text-enset-100/80 truncate">Motorized Scraping · 30 °C Bioreactor</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Key numbers -->
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 -mt-10 sm:-mt-16 relative z-20">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="stats"></div>
+      </div>
+
+      <!-- Interactive How it works -->
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+          <div>
+            <p class="eyebrow text-clay-600 mb-2">Interactive Process</p>
+            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-enset-900">From leaf sheath to Kocho in three steps</h2>
+          </div>
+          <p class="text-xs text-stone-500">Click any step to inspect the process</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div class="lg:col-span-5 flex flex-col gap-3" id="steps"></div>
+          <div class="lg:col-span-7 card overflow-hidden flex flex-col justify-between" id="step-preview"></div>
+        </div>
+      </div>
+
+      <!-- SDGs -->
+      <div class="bg-enset-50 border-y border-sand">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14">
+          <p class="eyebrow text-clay-600 mb-2">Impact</p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-enset-900 mb-8">Aligned with the UN Sustainable Development Goals</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="sdgs"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJECT ========== -->
+    <section id="page-project" class="page">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+        <p class="eyebrow text-clay-600 mb-2">The Project</p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-enset-900 max-w-3xl leading-tight">Mechanizing an Ethiopian food tradition</h2>
+
+        <!-- Interactive Before vs After Comparison -->
+        <div class="mt-10 card p-5 sm:p-8 bg-enset-50/70">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="eyebrow text-clay-600">Interactive Comparison</span>
+              <h3 class="font-serif text-2xl font-semibold text-enset-900 mt-1">Traditional vs. Group 67 Rig</h3>
+            </div>
+            <div class="inline-flex rounded-full bg-white p-1 border border-sand" role="tablist">
+              <button type="button" id="cmp-btn-trad" onclick="setCompare('trad')" class="px-4 py-1.5 rounded-full text-xs font-semibold transition">Traditional Method</button>
+              <button type="button" id="cmp-btn-rig" onclick="setCompare('rig')" class="px-4 py-1.5 rounded-full text-xs font-semibold transition">Group 67 Rig</button>
+            </div>
+          </div>
+          <div id="compare-panel"></div>
+        </div>
+
+        <!-- Problem -->
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div>
+            <h3 class="font-serif text-2xl font-semibold text-enset-900">The problem</h3>
+            <p class="mt-2 text-stone-600 text-sm leading-relaxed">Enset, the "tree against hunger", feeds over 20 million Ethiopians. Processing it is still done entirely by hand.</p>
+            <div class="mt-4 grid grid-cols-2 gap-3" id="problem-photos"></div>
+          </div>
+          <ul class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4" id="problems"></ul>
+        </div>
+
+        <!-- Solution modules -->
+        <h3 class="mt-16 font-serif text-2xl font-semibold text-enset-900">Our solution: two modules, one rig</h3>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5" id="modules"></div>
+
+        <!-- Objectives + Specs -->
+        <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="card p-6 sm:p-7">
+            <h3 class="font-serif text-2xl font-semibold text-enset-900 mb-5">Objectives</h3>
+            <ol class="space-y-4" id="objectives"></ol>
+          </div>
+          <div class="card p-6 sm:p-7">
+            <h3 class="font-serif text-2xl font-semibold text-enset-900 mb-5">Key specifications</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm"><tbody id="specs"></tbody></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TEAM ========== -->
+    <section id="page-team" class="page">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+        <p class="eyebrow text-clay-600 mb-2">Group 67</p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-enset-900">Meet the team</h2>
+        <p class="mt-3 text-stone-600 max-w-2xl">Ten students across seven engineering and architecture disciplines.</p>
+
+        <div class="mt-10 card p-6 flex flex-wrap items-center gap-5 bg-enset-800 border-enset-800 text-cream" id="advisor"></div>
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="team"></div>
+      </div>
+    </section>
+
+    <!-- ========== PROGRESS ========== -->
+    <section id="page-progress" class="page">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="eyebrow text-clay-600 mb-2">Progress</p>
+            <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-enset-900">Weekly progress</h2>
+            <p class="mt-2 text-stone-600">Switch between the Group 67 milestone flow and each member's individual log.</p>
+          </div>
+          <div class="inline-flex rounded-full bg-white p-1 border border-sand shadow-sm">
+            <button type="button" id="prog-btn-group" onclick="setProgressMode('group')" class="px-4 sm:px-5 py-2 rounded-full text-xs font-semibold transition">Group Progress</button>
+            <button type="button" id="prog-btn-ind" onclick="setProgressMode('individual')" class="px-4 sm:px-5 py-2 rounded-full text-xs font-semibold transition">Individual Progress</button>
+          </div>
+        </div>
+
+        <!-- GROUP PROGRESS VIEW -->
+        <div id="progress-group-view" class="mt-10 space-y-6">
+          <div class="card p-5 sm:p-6 bg-enset-50/60" id="group-flow-bar"></div>
+          <div class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2" id="week-pills"></div>
+          <div class="card p-5 sm:p-7 border-l-4" style="border-left-color:#C2703D" id="week-detail"></div>
+          <div class="pt-4">
+            <h3 class="font-serif text-xl font-semibold text-enset-900 mb-6">Full 12-week timeline</h3>
+            <ol class="relative border-l-2 border-sand ml-3" id="timeline"></ol>
+          </div>
+        </div>
+
+        <!-- INDIVIDUAL PROGRESS VIEW -->
+        <div id="progress-individual-view" class="mt-10 hidden">
+          <div id="member-picker"></div>
+          <div id="member-page" class="hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GALLERY ========== -->
+    <section id="page-gallery" class="page">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+        <p class="eyebrow text-clay-600 mb-2">Gallery</p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-enset-900">Designs &amp; prototype</h2>
+        <p class="mt-3 text-stone-600">CAD models, sketches and build photos, added as the project progresses.</p>
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="gallery"></div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="page-contact" class="page">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+        <p class="eyebrow text-clay-600 mb-2">Contact</p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-enset-900">Get in touch</h2>
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5" id="contact"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ LIGHTBOX ============================ -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-enset-950/90 backdrop-blur-sm items-center justify-center p-4" onclick="if(event.target===this)closeLightbox()">
+    <div class="max-w-3xl w-full bg-cream rounded-2xl overflow-hidden shadow-2xl border border-sand">
+      <div class="relative bg-enset-950 flex items-center justify-center">
+        <img id="lb-img" src="" alt="" class="max-h-[72vh] max-w-full w-auto object-contain" />
+        <button type="button" onclick="closeLightbox()" aria-label="Close lightbox" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-enset-950/75 text-white hover:bg-clay-600 transition text-lg leading-none cursor-pointer border-0">&times;</button>
+      </div>
+      <div class="px-5 py-3 flex flex-wrap items-center justify-between gap-3">
+        <span id="lb-cap" class="text-sm font-medium text-enset-900"></span>
+        <div class="flex gap-2">
+          <button type="button" onclick="stepLightbox(-1)" class="px-3 py-1 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">&larr; Prev</button>
+          <button type="button" onclick="stepLightbox(1)" class="px-3 py-1 rounded-full border border-sand text-xs font-semibold text-enset-900 hover:bg-sand/50 cursor-pointer bg-white">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="bg-enset-950 text-enset-100/70 text-sm">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-8 flex flex-wrap justify-between gap-3">
+      <span><span class="font-serif text-cream">Group 67</span> · Enset Scraping &amp; Fermentation Rig</span>
+      <span>Addis Ababa Science and Technology University · IETP4115 · 2026/27</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

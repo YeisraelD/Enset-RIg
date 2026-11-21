@@ -1,0 +1,133 @@
+/* =====================================================================
+ * Enset Scraping & Fermentation Rig — Group 67 (AASTU IETP4115)
+ * Visual Identity & Google Sites / GitHub Pages Responsive Styles
+ * ===================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+  overflow-x: clip;
+}
+
+body {
+  background: #F7F4EC;
+  color: #1C1F1A;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Hero Banner with relative path (works under GitHub Pages subpath) */
+.hero {
+  background-color: #1F3D2B;
+  background-image:
+    linear-gradient(120deg, rgba(15, 32, 22, 0.90) 0%, rgba(31, 61, 43, 0.80) 60%, rgba(194, 112, 61, 0.35) 100%),
+    url('../assets/images/hero-leaves.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle Enset-leaf vein pattern */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 28px);
+  pointer-events: none;
+}
+
+/* Navigation Tabs */
+.tab-btn {
+  position: relative;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4B5548;
+  transition: color 0.15s;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: #1F3D2B;
+}
+
+.tab-btn.active {
+  color: #1F3D2B;
+  font-weight: 700;
+}
+
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: -2px;
+  height: 2px;
+  background: #C2703D;
+  border-radius: 2px;
+}
+
+/* Page Transitions */
+.page {
+  display: none;
+  animation: fade 0.25s ease-out;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Cards & Typography Helpers */
+.card {
+  background: #ffffff;
+  border: 1px solid #E7E1D2;
+  border-radius: 18px;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Keep team portraits nicely centered on faces */
+.portrait-img {
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+/* Clean iframe / mobile adaptability */
+@media (max-width: 640px) {
+  .tab-btn {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.82rem;
+  }
+
+  .tab-btn.active::after {
+    left: 0.65rem;
+    right: 0.65rem;
+  }
+}
