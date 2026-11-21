@@ -445,7 +445,7 @@ const SITE = {
       shortIntro: "Software Engineering student focused on ESP32 embedded firmware, closed-loop PID thermal control, fault-tolerant state machines, and system architecture.",
       img: "assets/images/team/yeisrael.jpg",
       email: "yeisraeld@gmail.com",
-      link: "https://sites.google.com/view/yeisraeld/home",
+      link: "",
       portfolio: {
         bio: "I am Yeisrael Dawit, a Software Engineering student at Addis Ababa Science and Technology University (AASTU). As a member of Group 67, I am working on a multidisciplinary engineering project that combines software, electronics, and mechanical systems to solve real-world problems. My focus within the team is developing the control and monitoring side of the system — designing simple, reliable software that supports automation, data collection, and system efficiency.",
         academicBackground: "B.Sc. Candidate in Software Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
@@ -471,7 +471,7 @@ const SITE = {
         links: {
           github: "https://github.com/YeisraelD",
           linkedin: "",
-          website: "https://sites.google.com/view/yeisraeld/home"
+          website: ""
         }
       }
     }
