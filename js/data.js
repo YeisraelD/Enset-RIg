@@ -127,18 +127,354 @@ const SITE = {
     office: "Block 64, 4th Floor"
   },
 
-  // Add each member's email and portfolio link when ready.
+  // Add each member's email, portfolio details, and links here.
+  // Each member automatically gets a dedicated page at: team/<slug>/
   team: [
-    { name: "Tsion Anemaw",     dept: "Software Engineering",          role: "Data Logging & Interface",       img: "assets/images/team/tsion.jpg",    email: "",                    link: "" },
-    { name: "Tewodros Brhanu",  dept: "Civil Engineering",             role: "Structural Frame & Damping",     img: "assets/images/team/tewodros.jpg", email: "",                    link: "" },
-    { name: "Yosef Gebre",      dept: "Civil Engineering",             role: "Hydraulics & Settling Tank",     img: "assets/images/team/yosef.jpg",    email: "",                    link: "" },
-    { name: "Habtamu Mulugeta", dept: "Mechanical Engineering",        role: "Crank, Drive & Housing",         img: "assets/images/team/habtamu.jpg",  email: "",                    link: "" },
-    { name: "Natnael Tadesse",  dept: "Architecture",                  role: "Housing & Ergonomic Layout",     img: "assets/images/team/natnael.jpg",  email: "",                    link: "" },
-    { name: "Yabets Nigatu",    dept: "Electromechanical Engineering", role: "Blade Spring & Press",           img: "assets/images/team/yabets.jpg",   email: "",                    link: "" },
-    { name: "Rahel Ewnetu",     dept: "Electrical & Computer Eng.",    role: "Power Stage & Protection",       img: "assets/images/team/rahel.jpg",    email: "",                    link: "" },
-    { name: "Dawit Behailu",    dept: "Electrical & Computer Eng.",    role: "Sensors & Signal Acquisition",   img: "assets/images/team/dawit.jpg",    email: "",                    link: "" },
-    { name: "Meron Feleke",     dept: "Chemical Engineering",          role: "Fermentation & Acidity Testing", img: "assets/images/team/meron.jpg",    email: "",                    link: "" },
-    { name: "Yeisrael Dawit",   dept: "Software Engineering",          role: "Firmware & Embedded Control",    img: "assets/images/team/yeisrael.jpg", email: "yeisraeld@gmail.com", link: "https://sites.google.com/view/yeisraeld/home" }
+    {
+      slug: "tsion-anemaw",
+      name: "Tsion Anemaw",
+      id: "ETS 1629/16",
+      dept: "Software Engineering",
+      role: "Data Logging & Interface",
+      shortIntro: "Software Engineering student contributing to the Enset Rig's telemetry logging, user interface, and system documentation.",
+      img: "assets/images/team/tsion.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Software Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Embedded UI Design", "Data Logging & CSV Schemas", "Web Development"],
+          engineering: ["System Documentation", "Calibration & Testing"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Designing the 16×2 I²C LCD diagnostic menu and user interface flow.",
+            "Structuring the FAT32 MicroSD CSV telemetry format and fermentation data logs.",
+            "Supporting statistical fermentation kinetics documentation and e-Portfolio integration."
+          ],
+          problemsSolved: [
+            "Making live temperature, stroke, and fermentation status readable for operators without a computer."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "tewodros-brhanu",
+      name: "Tewodros Brhanu",
+      id: "ETS 1618/16",
+      dept: "Civil Engineering",
+      role: "Structural Frame & Damping",
+      shortIntro: "Civil Engineering student focused on structural frame stability, weldment stress analysis, and reciprocating vibration damping.",
+      img: "assets/images/team/tewodros.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Civil Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Structural Load Analysis", "Vibration Damping"],
+          engineering: ["Angle-Iron Frame Stability", "Material Strength Testing"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Evaluating structural loading and weldment stress on the 40×40×4 mm angle-iron chassis.",
+            "Designing dynamic vibration damping to isolate reciprocating slider-crank forces.",
+            "Supporting tensile testing of recovered Enset Kacha fibres in the Civil Materials Lab."
+          ],
+          problemsSolved: [
+            "Preventing benchtop frame wobble and fatigue under continuous 40–60 RPM reciprocating scraping strokes."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "yosef-gebre",
+      name: "Yosef Gebre",
+      id: "ETS 1696/16",
+      dept: "Civil Engineering",
+      role: "Hydraulics & Settling Tank",
+      shortIntro: "Civil Engineering student working on Bulla sap drainage hydraulics, gravitational starch settling, and runoff management.",
+      img: "assets/images/team/yosef.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Civil Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Hydraulics & Fluid Drainage", "Sedimentation Design"],
+          engineering: ["Stokes' Law Settling Analysis", "Durability & Environmental Loads"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Designing the inclined sap collection trough and gravity drainage slope.",
+            "Sizing the Bulla starch gravitational settling container using Stokes' Law.",
+            "Planning clean wastewater and sap separation plumbing."
+          ],
+          problemsSolved: [
+            "Capturing starch-rich Bulla sap that is normally lost as runoff during manual Enset scraping."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "habtamu-mulugeta",
+      name: "Habtamu Mulugeta",
+      id: "ETS 0756/16",
+      dept: "Mechanical Engineering",
+      role: "Crank, Drive & Housing",
+      shortIntro: "Mechanical Engineering student designing the motorized slider-crank linkage, guide rod alignment, and drive kinematics.",
+      img: "assets/images/team/habtamu.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Mechanical Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Mechanical CAD Modeling", "Linkage Kinematics & Stress Analysis"],
+          engineering: ["Slider-Crank Sizing", "Workshop Machining"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Modeling the 100 mm crank arm, 300 mm connecting rod, and 200 mm linear stroke kinematics.",
+            "Verifying bending stress on dual Ø12 mm ground guide rods and LM12UU linear bushings.",
+            "Coordinating AASTU Mechanical Workshop fabrication of the slider block and housing."
+          ],
+          problemsSolved: [
+            "Replicating the linear traditional scraping stroke mechanically without tearing Enset fibres."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "natnael-tadesse",
+      name: "Natnael Tadesse",
+      id: "ETS 1248/14",
+      dept: "Architecture",
+      role: "Housing & Ergonomic Layout",
+      shortIntro: "Architecture student focused on ergonomic benchtop layout, operator safety guarding, and integrated housing design.",
+      img: "assets/images/team/natnael.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Architecture — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Spatial & Ergonomic Design", "3D Modeling & Enclosure Layout"],
+          engineering: ["Safety Guarding Geometry", "User-Centered Workspace Layout"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Designing the ergonomic benchtop layout combining scraping bed, chute, and bioreactor.",
+            "Developing the transparent protective safety splash guard and feeding geometry.",
+            "Integrating chassis aesthetics with practical operator access and cleaning."
+          ],
+          problemsSolved: [
+            "Keeping operator hands safely away from moving slider-crank linkages while maintaining comfortable standing operation."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "yabets-nigatu",
+      name: "Yabets Nigatu",
+      id: "ETS 1673/16",
+      dept: "Electromechanical Engineering",
+      role: "Blade Spring & Press",
+      shortIntro: "Electromechanical Engineering student developing the hinged spring-loaded scraping blade, motor shaft coupling, and thermal mounting.",
+      img: "assets/images/team/yabets.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Electromechanical Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Electromechanical Coupling", "Spring & Actuator Integration"],
+          engineering: ["Hinged Blade Kinematics", "Thermal Hardware Mounting"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Designing the one-way hinged steel scraping blade with compression return springs.",
+            "Developing the lathe-turned hub coupling between the 12V worm-gear motor and crank arm.",
+            "Integrating mechanical mounting for the 12V 40W PTC heating pad and heat spreader."
+          ],
+          problemsSolved: [
+            "Allowing the scraper blade to apply firm pressure on the forward stroke and lift freely on the return stroke."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "rahel-ewnetu",
+      name: "Rahel Ewnetu",
+      id: "ETS 1303/16",
+      dept: "Electrical & Computer Eng.",
+      role: "Power Stage & Protection",
+      shortIntro: "Electrical & Computer Engineering student designing the 12V DC power distribution, motor driver protection, and safety interlocks.",
+      img: "assets/images/team/rahel.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Electrical & Computer Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Power Distribution & Schematics", "Circuit Protection"],
+          engineering: ["MOSFET & Relay Motor Driving", "Galvanic Isolation"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Designing the 12V/10A DC power architecture isolating high-current actuators from 3.3V logic.",
+            "Building the opto-isolated MOSFET PWM heater driver and motor relay with flyback protection.",
+            "Implementing the inline 10A fuse, bimetallic thermal cutoff, and hardware emergency stop."
+          ],
+          problemsSolved: [
+            "Eliminating 220V AC shock hazards near wet plant sap by running the entire rig on protected 12V DC."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "dawit-behailu",
+      name: "Dawit Behailu",
+      id: "ETS 0461/16",
+      dept: "Electrical & Computer Eng.",
+      role: "Sensors & Signal Acquisition",
+      shortIntro: "Electrical & Computer Engineering student handling temperature probes, stroke limit switches, optical bubble sensing, and signal conditioning.",
+      img: "assets/images/team/dawit.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Electrical & Computer Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Sensor Interfacing", "Signal Conditioning"],
+          engineering: ["1-Wire & Optical Sensing", "Hardware Debouncing"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Interfacing dual waterproof DS18B20 temperature probes on a conditioned 1-Wire bus.",
+            "Wiring stroke-end limit microswitches for carriage position and stall detection.",
+            "Designing the infrared optical airlock bubble-counter sensor circuit."
+          ],
+          problemsSolved: [
+            "Delivering clean, noise-free sensor signals to the ESP32 alongside a high-current DC motor."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "meron-feleke",
+      name: "Meron Feleke",
+      id: "ETS 0993/16",
+      dept: "Chemical Engineering",
+      role: "Fermentation & Acidity Testing",
+      shortIntro: "Chemical Engineering student leading anaerobic Kocho fermentation kinetics, pH monitoring, and laboratory titratable acidity assays.",
+      img: "assets/images/team/meron.jpg",
+      email: "",
+      link: "",
+      portfolio: {
+        bio: "",
+        academicBackground: "B.Sc. Candidate in Chemical Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Bioprocess & Fermentation Kinetics", "Analytical Titration"],
+          engineering: ["Mass Balance & Moisture Assays", "Starch Purity Verification"],
+          tools: [],
+          interests: []
+        },
+        contributions: {
+          responsibilities: [
+            "Modeling mesophilic lactic acid fermentation kinetics (30.0 ± 1.5 °C) to compress fermentation from 90 days to ~14 days.",
+            "Running 0.1 N NaOH titratable acidity and pH boundary tests (pH ≤ 4.2) in the AASTU Biotechnology Lab.",
+            "Measuring pulp moisture reduction and Bulla starch recovery purity."
+          ],
+          problemsSolved: [
+            "Establishing verifiable biochemical targets to prove the heated bioreactor produces safe, stabilized Kocho."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: { github: "", linkedin: "", website: "" }
+      }
+    },
+    {
+      slug: "yeisrael-dawit",
+      name: "Yeisrael Dawit",
+      id: "ETS 1446/16",
+      dept: "Software Engineering",
+      role: "Firmware & Embedded Control",
+      shortIntro: "Software Engineering student focused on ESP32 embedded firmware, closed-loop PID thermal control, fault-tolerant state machines, and system architecture.",
+      img: "assets/images/team/yeisrael.jpg",
+      email: "yeisraeld@gmail.com",
+      link: "https://sites.google.com/view/yeisraeld/home",
+      portfolio: {
+        bio: "I am Yeisrael Dawit, a Software Engineering student at Addis Ababa Science and Technology University (AASTU). As a member of Group 67, I am working on a multidisciplinary engineering project that combines software, electronics, and mechanical systems to solve real-world problems. My focus within the team is developing the control and monitoring side of the system — designing simple, reliable software that supports automation, data collection, and system efficiency.",
+        academicBackground: "B.Sc. Candidate in Software Engineering — Addis Ababa Science and Technology University (AASTU), IETP4115 Group 67.",
+        skills: {
+          technical: ["Embedded C/C++ (ESP32)", "FreeRTOS Dual-Core Firmware", "Web Development (HTML/CSS/JS)"],
+          engineering: ["Discrete PID Thermal Control", "Finite State Machines & Safety Interlocks", "System Design Architecture (SDA)"],
+          tools: ["ESP32 / Arduino Framework", "Git & GitHub Pages", "I²C / SPI / 1-Wire Protocols"],
+          interests: ["Cyber-Physical Systems", "Embedded Automation", "IoT Telemetry"]
+        },
+        contributions: {
+          responsibilities: [
+            "Designing the dual-core FreeRTOS firmware architecture separating real-time control (Core 0) from logging and UI (Core 1).",
+            "Implementing the discrete PID temperature controller with anti-windup clamping and dual-probe cross-validation (30.0 ± 1.5 °C).",
+            "Developing the 7-state safety state machine and fast motor stall/jam cutoff routine.",
+            "Authoring the Software & System Design Architecture (SDA) document and building the Group 67 web portfolio."
+          ],
+          problemsSolved: [
+            "Preventing motor burnout during fibrous jams via fast interrupt-based cutoff and preventing bioreactor thermal runaway via dual-sensor sanity checks."
+          ]
+        },
+        experience: [],
+        certifications: [],
+        links: {
+          github: "https://github.com/YeisraelD",
+          linkedin: "",
+          website: "https://sites.google.com/view/yeisraeld/home"
+        }
+      }
+    }
   ],
 
   // status: "done" | "current" | "upcoming"

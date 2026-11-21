@@ -402,11 +402,7 @@ function openMemberProgress(idx) {
           <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-enset-900 mt-0.5">${m.name}</h3>
         </div>
       </div>
-      ${
-        m.link
-          ? `<a href="${m.link}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-enset-800 hover:bg-enset-700 text-cream text-xs font-semibold transition">Open Personal e-Portfolio &nearr;</a>`
-          : ""
-      }
+      <a href="team/${m.slug}/" class="btn-tactile px-5 py-2.5 rounded-full bg-enset-800 hover:bg-clay-600 text-cream text-xs font-semibold">View Full Portfolio &rarr;</a>
     </div>
     <h4 class="font-serif text-2xl font-semibold text-enset-900 mb-4">${m.name}'s Weekly Log</h4>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -545,23 +541,31 @@ function render() {
     </div>`;
 
   $("team").innerHTML = SITE.team
-    .map((m) => {
-      const name = m.link
-        ? `<a href="${m.link}" target="_blank" rel="noopener noreferrer" class="hover:text-clay-700 underline decoration-clay-600/40 underline-offset-4">${m.name}</a>`
-        : m.name;
-      return `
-      <div class="card card-interactive overflow-hidden flex flex-col border-b-4 group" style="border-bottom-color:#C2703D">
-        <div class="p-3 pb-0">
-          <div class="overflow-hidden rounded-xl bg-enset-50">
-            <img src="${imgSrc(m.img)}" alt="${m.name} — ${m.dept}" loading="lazy" class="w-full aspect-[16/10] portrait-img group-hover:scale-[1.03] transition duration-300" />
+    .map((m) => `
+      <article class="card card-interactive overflow-hidden flex flex-col justify-between border-b-4 group" style="border-bottom-color:#C2703D">
+        <div>
+          <div class="p-3 pb-0">
+            <a href="team/${m.slug}/" class="block overflow-hidden rounded-xl bg-enset-50">
+              <img src="${imgSrc(m.img)}" alt="${m.name} — ${m.dept}" loading="lazy" class="w-full aspect-[16/10] portrait-img group-hover:scale-[1.03] transition duration-300" />
+            </a>
+          </div>
+          <div class="p-5 pb-4">
+            <span class="inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-enset-50 text-enset-800 border border-enset-100">${m.dept}</span>
+            <h4 class="font-serif text-xl font-semibold text-enset-900 mt-2 leading-snug">
+              <a href="team/${m.slug}/" class="hover:text-clay-700 transition">${m.name}</a>
+            </h4>
+            <p class="text-xs font-semibold text-clay-700 mt-0.5">${m.role}</p>
+            <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">${m.shortIntro || ""}</p>
           </div>
         </div>
-        <div class="p-5 text-center">
-          <h4 class="font-semibold text-enset-900 text-base">${name}</h4>
-          <p class="text-xs text-clay-700 font-semibold mt-1">${m.dept}</p>
+        <div class="px-5 pb-5 pt-3 border-t border-sand flex items-center justify-between gap-2">
+          <span class="text-[11px] font-mono text-stone-400">${m.id || "Group 67"}</span>
+          <a href="team/${m.slug}/" class="btn-tactile inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-enset-800 hover:bg-clay-600 text-cream text-xs font-semibold">
+            <span>View Portfolio</span>
+            <span>&rarr;</span>
+          </a>
         </div>
-      </div>`;
-    })
+      </article>`)
     .join("");
 
   renderMemberPicker();
@@ -717,11 +721,7 @@ function renderContactCards() {
             </div>`
               : `<span class="text-xs text-stone-400 italic">Email will be added soon</span>`
           }
-          ${
-            m.link
-              ? `<a href="${m.link}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-clay-700 hover:text-clay-600 inline-flex items-center gap-1">Personal e-Portfolio &nearr;</a>`
-              : ""
-          }
+          <a href="team/${m.slug}/" class="text-[11px] font-semibold text-clay-700 hover:text-enset-900 inline-flex items-center gap-1">View Portfolio &rarr;</a>
         </div>
       </div>`;
     })
