@@ -374,9 +374,18 @@ function render() {
   $("problems").innerHTML = SITE.problems
     .map(
       (p) => `
-    <li class="card p-5 border-l-4" style="border-left-color:#C2703D">
-      <h4 class="font-semibold text-enset-900">${p.title}</h4>
-      <p class="mt-1 text-sm text-stone-600">${p.text}</p>
+    <li class="card p-5 border-l-4 flex flex-col justify-between gap-4 overflow-hidden" style="border-left-color:#C2703D">
+      <div>
+        <h4 class="font-semibold text-enset-900">${p.title}</h4>
+        <p class="mt-1 text-sm text-stone-600 leading-relaxed">${p.text}</p>
+      </div>
+      ${
+        p.img
+          ? `<div class="overflow-hidden rounded-xl border border-sand bg-enset-50">
+               <img src="${imgSrc(p.img)}" alt="${p.title}" loading="lazy" class="w-full aspect-[4/3] object-cover ${p.pos || "object-center"} hover:scale-105 transition duration-300" />
+             </div>`
+          : ""
+      }
     </li>`
     )
     .join("");

@@ -84,9 +84,9 @@ const SITE = {
   ],
 
   problems: [
-    { title: "Exhausting labour", text: "Women scrape Enset by hand with bamboo tools, kneeling for hours." },
-    { title: "Food loss", text: "Up to 30% of the edible starch is wasted in manual processing." },
-    { title: "Slow, unsafe fermentation", text: "Pulp sits in earth pits for 60–90 days, often spoiling." }
+    { title: "Exhausting labour", text: "Women scrape Enset by hand with bamboo tools, kneeling for hours.", img: "assets/images/problem-labour.jpg", pos: "object-[50%_25%]" },
+    { title: "Food loss", text: "Up to 30% of the edible starch is wasted in manual processing.", img: "assets/images/problem-foodloss.jpg", pos: "object-center" },
+    { title: "Slow, unsafe fermentation", text: "Pulp sits in earth pits for 60–90 days, often spoiling.", img: "assets/images/problem-fermentation.jpg", pos: "object-center" }
   ],
 
   modules: [
