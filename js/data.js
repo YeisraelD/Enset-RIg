@@ -133,7 +133,7 @@ const SITE = {
     {
       slug: "tsion-anemaw",
       name: "Tsion Anemaw",
-      id: "ETS 1629/16",
+      id: "ETS 1377/16",
       dept: "Software Engineering",
       role: "Data Logging & Interface",
       shortIntro: "Software Engineering student contributing to the Enset Rig's telemetry logging, user interface, and system documentation.",
@@ -167,7 +167,7 @@ const SITE = {
     {
       slug: "tewodros-brhanu",
       name: "Tewodros Brhanu",
-      id: "ETS 1618/16",
+      id: "ETS 1348/16",
       dept: "Civil Engineering",
       role: "Structural Frame & Damping",
       shortIntro: "Civil Engineering student focused on structural frame stability, weldment stress analysis, and reciprocating vibration damping.",
@@ -201,7 +201,7 @@ const SITE = {
     {
       slug: "yosef-gebre",
       name: "Yosef Gebre",
-      id: "ETS 1696/16",
+      id: "ETS 1532/16",
       dept: "Civil Engineering",
       role: "Hydraulics & Settling Tank",
       shortIntro: "Civil Engineering student working on Bulla sap drainage hydraulics, gravitational starch settling, and runoff management.",
@@ -235,7 +235,7 @@ const SITE = {
     {
       slug: "habtamu-mulugeta",
       name: "Habtamu Mulugeta",
-      id: "ETS 0756/16",
+      id: "ETS 0635/16",
       dept: "Mechanical Engineering",
       role: "Crank, Drive & Housing",
       shortIntro: "Mechanical Engineering student designing the motorized slider-crank linkage, guide rod alignment, and drive kinematics.",
@@ -337,7 +337,7 @@ const SITE = {
     {
       slug: "rahel-ewnetu",
       name: "Rahel Ewnetu",
-      id: "ETS 1303/16",
+      id: "ETS 1157/16",
       dept: "Electrical & Computer Eng.",
       role: "Power Stage & Protection",
       shortIntro: "Electrical & Computer Engineering student designing the 12V DC power distribution, motor driver protection, and safety interlocks.",
@@ -371,7 +371,7 @@ const SITE = {
     {
       slug: "dawit-behailu",
       name: "Dawit Behailu",
-      id: "ETS 0461/16",
+      id: "ETS 0395/16",
       dept: "Electrical & Computer Eng.",
       role: "Sensors & Signal Acquisition",
       shortIntro: "Electrical & Computer Engineering student handling temperature probes, stroke limit switches, optical bubble sensing, and signal conditioning.",
@@ -405,7 +405,7 @@ const SITE = {
     {
       slug: "meron-feleke",
       name: "Meron Feleke",
-      id: "ETS 0993/16",
+      id: "ETS 0948/16",
       dept: "Chemical Engineering",
       role: "Fermentation & Acidity Testing",
       shortIntro: "Chemical Engineering student leading anaerobic Kocho fermentation kinetics, pH monitoring, and laboratory titratable acidity assays.",
